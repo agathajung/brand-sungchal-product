@@ -1,0 +1,9 @@
+# 명세서 (배포 불필요)
+brand_seongchal_claudecode_spec.docx
+
+# Claude Code 설정
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

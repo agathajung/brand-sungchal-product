@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>브랜드 성찰 : 제품편</title>
+
+<!-- ===== SEO ===== -->
+<meta name="description" content="브랜드의 핵심인 제품에 대해 점검하고 브랜드를 성찰합니다. 15문항 · 5개 영역 · 3분 소요">
+<meta name="keywords" content="브랜드 진단, 제품 전략, 브랜드 성찰, 성찰소, 브랜드 테스트">
+<meta name="author" content="성찰소">
+
+<!-- ===== Open Graph (카카오·페이스북·링크드인) ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="성찰소(省察所)">
+<meta property="og:title" content="브랜드 성찰 : 제품편">
+<meta property="og:description" content="브랜드의 핵심인 제품에 대해 점검하고 브랜드를 성찰합니다. 15문항 · 5개 영역 · 3분 소요">
+<meta property="og:image" content="https://YOUR_DOMAIN/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://YOUR_DOMAIN/brand-seongchal-product.html">
+<meta property="og:locale" content="ko_KR">
+
+<!-- ===== Twitter Card ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="브랜드 성찰 : 제품편">
+<meta name="twitter:description" content="브랜드의 핵심인 제품에 대해 점검하고 브랜드를 성찰합니다. 15문항 · 5개 영역 · 3분 소요">
+<meta name="twitter:image" content="https://YOUR_DOMAIN/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  /* ===== CSS 변수 ===== */
+  :root {
+    --primary: #253D35;
+    --primary-mid: #3A5C50;
+    --primary-light: #EBF1EE;
+    --gold: #B8925A;
+    --gold-light: #F8F0E3;
+    --bg: #F6F2ED;
+    --border: #E3DCD4;
+    --text: #1A1A1A;
+    --text-secondary: #6B6560;
+    --white: #FFFFFF;
+
+    /* 영역별 컬러 */
+    --d1-bg: #EBF1EE; --d1-text: #253D35;
+    --d2-bg: #F1EDE8; --d2-text: #3D3525;
+    --d3-bg: #EDE8F1; --d3-text: #352543;
+    --d4-bg: #E8EDF1; --d4-text: #25353D;
+    --d5-bg: #F1E8EF; --d5-text: #43253D;
+
+    /* 상태 컬러 */
+    --good-bg: #EBF1EE; --good-text: #253D35;
+    --warn-bg: #F8F0E3; --warn-text: #8B6914;
+    --bad-bg: #F5E8E8; --bad-text: #8B3A3A;
+
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 2px 16px rgba(37,61,53,0.08);
+    --shadow-card: 0 4px 24px rgba(37,61,53,0.10);
+  }
+
+  /* ===== 리셋 & 기본 ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+  h1, h2, h3, h4 { font-family: 'Noto Serif KR', serif; }
+  button { cursor: pointer; border: none; outline: none; font-family: inherit; }
+  input { outline: none; font-family: inherit; }
+
+  /* ===== 레이아웃 ===== */
+  .app-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screen {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    animation: fadeIn 0.35s ease;
+  }
+  .screen.active { display: flex; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 공통 버튼 ===== */
+  .btn-primary {
+    display: block;
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.1s;
+    text-align: center;
+  }
+  .btn-primary:hover { background: var(--primary-mid); }
+  .btn-primary:active { transform: scale(0.98); }
+  .btn-primary:disabled {
+    background: #C4C0BB;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-outline {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .btn-outline:hover { background: var(--primary-light); }
+
+  .btn-ghost {
+    background: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    padding: 8px 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+  .btn-ghost:hover { color: var(--text); }
+
+  /* ===== =============================== ===== */
+  /* ===== SCREEN 1: 인트로               ===== */
+  /* ===== =============================== ===== */
+  #screen-intro {
+    padding: 0;
+  }
+
+  .intro-hero {
+    background: var(--primary);
+    padding: 60px 28px 44px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .intro-hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .intro-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .intro-label {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 5px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .intro-hero h1 {
+    font-size: clamp(2rem, 6vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .intro-hero p {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.85;
+    letter-spacing: 0.01em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .intro-stats {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-top: 44px;
+    padding-top: 22px;
+    position: relative;
+    z-index: 1;
+  }
+  .intro-stat {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 6px;
+  }
+  .intro-stat + .intro-stat {
+    border-left: 1px solid rgba(255,255,255,0.15);
+  }
+  .intro-stat-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .intro-stat-label {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.01em;
+  }
+
+  .intro-cta-hero {
+    margin-top: auto;
+    padding-top: 40px;
+    position: relative;
+    z-index: 1;
+  }
+  .btn-primary-hero {
+    display: block;
+    width: 100%;
+    padding: 17px 24px;
+    background: rgba(255,255,255,0.13);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: var(--white);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .btn-primary-hero:hover { background: rgba(255,255,255,0.22); }
+
+  .intro-section-title {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .domain-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .domain-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  .domain-badge-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .intro-cta { margin-top: auto; }
+
+  /* ===== =============================== ===== */
+  /* ===== SCREEN 2: 이메일 수집          ===== */
+  /* ===== =============================== ===== */
+  #screen-email {
+    padding: 0;
+  }
+
+  .email-header {
+    background: var(--primary);
+    padding: 40px 24px 32px;
+    color: var(--white);
+  }
+  .email-header .back-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    padding: 0;
+  }
+  .email-header .back-btn:hover { color: var(--white); }
+  .email-header h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .email-header p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.6;
+  }
+
+  .email-body {
+    padding: 32px 24px 40px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .form-label span {
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 0.8125rem;
+  }
+  .form-input {
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    background: var(--white);
+    color: var(--text);
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input:focus { border-color: var(--primary); }
+  .form-input::placeholder { color: #B5B0AA; }
+
+  .email-privacy {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding: 14px 16px;
+    background: var(--primary-light);
+    border-radius: var(--radius-sm);
+  }
+
+  .email-cta { margin-top: auto; display: flex; flex-direction: column; gap: 12px; }
+
+  /* ===== =============================== ===== */
+  /* ===== SCREEN 3: 설문                 ===== */
+  /* ===== =============================== ===== */
+  #screen-survey {
+    padding: 0;
+  }
+
+  .survey-header {
+    background: var(--white);
+    padding: 20px 24px 0;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .survey-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .survey-back {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    padding: 0;
+  }
+  .survey-back:hover { color: var(--text); }
+  .survey-progress-text {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  .survey-progress-bar-wrap {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 0;
+  }
+  .survey-progress-bar {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .survey-body {
+    padding: 28px 24px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+
+  .question-domain-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .question-domain-tag .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+
+  .question-num {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .question-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.55;
+    margin-bottom: 28px;
+    color: var(--text);
+  }
+
+  /* Q1-1 체크박스 */
+  .checkbox-hint {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .checkbox-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--white);
+    user-select: none;
+  }
+  .checkbox-item:hover { border-color: var(--primary-mid); background: var(--primary-light); }
+  .checkbox-item.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+  .checkbox-item input[type="checkbox"] { display: none; }
+  .checkbox-box {
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .checkbox-item.selected .checkbox-box {
+    border-color: var(--primary);
+    background: var(--primary);
+  }
+  .checkbox-box svg { display: none; }
+  .checkbox-item.selected .checkbox-box svg { display: block; }
+  .checkbox-label { font-size: 0.9375rem; line-height: 1.5; }
+
+  /* A/B/C/D 라디오 */
+  .radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .radio-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--white);
+    user-select: none;
+  }
+  .radio-item:hover { border-color: var(--primary-mid); background: var(--primary-light); }
+  .radio-item.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+  }
+  .radio-item input[type="radio"] { display: none; }
+  .radio-letter {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+  .radio-item.selected .radio-letter {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: var(--white);
+  }
+  .radio-text { font-size: 0.9375rem; line-height: 1.55; padding-top: 2px; }
+
+  .survey-footer-wrap {
+    background: var(--white);
+    border-top: 1px solid var(--border);
+  }
+  .survey-quote {
+    padding: 18px 28px 0;
+    display: none;
+    text-align: center;
+  }
+  .survey-quote-text {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    font-style: italic;
+  }
+  .survey-quote-author {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 6px;
+  }
+  .survey-footer {
+    padding: 12px 24px 28px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .btn-prev {
+    flex-shrink: 0;
+    width: 48px; height: 48px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-secondary);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-prev:hover { border-color: var(--primary); color: var(--primary); }
+  .btn-prev:disabled { opacity: 0.3; cursor: not-allowed; }
+  .btn-next {
+    flex: 1;
+    padding: 14px 24px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .btn-next:hover:not(:disabled) { background: var(--primary-mid); }
+  .btn-next:disabled {
+    background: #C4C0BB;
+    cursor: not-allowed;
+  }
+
+  /* ===== =============================== ===== */
+  /* ===== SCREEN 4: 결과                 ===== */
+  /* ===== =============================== ===== */
+  #screen-result {
+    padding-bottom: 48px;
+  }
+
+  .result-hero {
+    background: var(--primary);
+    padding: 48px 24px 40px;
+    color: var(--white);
+    text-align: center;
+  }
+  .result-stage-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 5px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .result-hero h2 {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .result-hero p {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.7;
+    max-width: 400px;
+    margin: 0 auto 28px;
+  }
+  .result-score-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+    background: rgba(255,255,255,0.12);
+    padding: 12px 28px;
+    border-radius: var(--radius);
+  }
+  .result-score-num {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+  .result-score-denom {
+    font-size: 1.125rem;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .result-body { padding: 32px 24px 0; }
+
+  .result-section { margin-bottom: 36px; }
+  .result-section-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 레이더 차트 */
+  .chart-wrap {
+    background: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 28px 16px 20px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+  }
+  .chart-canvas-wrap {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* 영역별 점수 카드 */
+  .domain-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .domain-card {
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .domain-card-info { flex: 1; min-width: 0; }
+  .domain-card-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .domain-card-bar-wrap {
+    height: 6px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .domain-card-bar {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.8s ease;
+  }
+  .domain-card-score {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .domain-card-score span {
+    font-size: 0.75rem;
+    font-weight: 400;
+    opacity: 0.6;
+  }
+  .domain-card-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 100px;
+    flex-shrink: 0;
+  }
+
+  /* 이메일 재수집 */
+  .email-recollect {
+    background: var(--primary-light);
+    border-radius: var(--radius);
+    padding: 24px;
+    border: 1px solid var(--border);
+  }
+  .email-recollect h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .email-recollect p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+  .email-recollect-form {
+    display: flex;
+    gap: 8px;
+  }
+  .email-recollect-input {
+    flex: 1;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    background: var(--white);
+  }
+  .email-recollect-input:focus { border-color: var(--primary); }
+  .email-recollect-btn {
+    padding: 12px 20px;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .email-recollect-btn:hover { background: var(--primary-mid); }
+  .email-saved-msg {
+    font-size: 0.875rem;
+    color: var(--primary);
+    font-weight: 500;
+    text-align: center;
+    padding: 12px;
+    display: none;
+  }
+
+  /* CTA 영역 */
+  .result-cta {
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .btn-copy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--white);
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-copy:hover { border-color: var(--primary); background: var(--primary-light); }
+
+  /* ===== 반응형 ===== */
+  @media (max-width: 480px) {
+    .intro-hero { padding: 40px 20px 32px; }
+    .intro-body { padding: 24px 20px 32px; }
+    .email-body { padding: 24px 20px 32px; }
+    .survey-body { padding: 20px 20px 20px; }
+    .survey-footer { padding: 10px 20px 24px; }
+    .survey-quote { padding: 14px 20px 0; }
+    .result-body { padding: 24px 20px 0; }
+    .result-cta { padding: 0 20px; }
+    .email-recollect-form { flex-direction: column; }
+    .email-recollect-btn { width: 100%; }
+  }
+
+  /* ===== 토스트 ===== */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--text);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 100;
+    white-space: nowrap;
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="app-wrapper">
+
+  <!-- ===== SCREEN 1: 인트로 ===== -->
+  <section id="screen-intro" class="screen active">
+    <div class="intro-hero">
+      <div class="intro-label">성찰소(省察所)</div>
+      <h1>브랜드 성찰<br>: 제품편</h1>
+      <p>브랜드의 핵심인 제품에 대해 점검하고<br>브랜드를 성찰합니다.</p>
+      <div class="intro-stats">
+        <div class="intro-stat">
+          <span class="intro-stat-num">15</span>
+          <span class="intro-stat-label">문항</span>
+        </div>
+        <div class="intro-stat">
+          <span class="intro-stat-num">5</span>
+          <span class="intro-stat-label">개 영역</span>
+        </div>
+        <div class="intro-stat">
+          <span class="intro-stat-num">3분</span>
+          <span class="intro-stat-label">소요</span>
+        </div>
+      </div>
+      <div class="intro-cta-hero">
+        <button class="btn-primary-hero" onclick="showScreen('email')">시작하기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 2: 이메일 수집 ===== -->
+  <section id="screen-email" class="screen">
+    <div class="email-header">
+      <h2>결과를 이메일로<br>받아보세요</h2>
+      <p>입력하시면 진단 결과와 함께 맞춤 인사이트를 보내드립니다.</p>
+    </div>
+    <div class="email-body">
+      <div class="form-group">
+        <label class="form-label" for="input-brand">브랜드명 <span>(선택)</span></label>
+        <input type="text" id="input-brand" class="form-input" placeholder="" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="input-email">이메일 주소 <span>(선택)</span></label>
+        <input type="email" id="input-email" class="form-input" placeholder="example@brand.com" autocomplete="email">
+      </div>
+      <div class="email-privacy">
+        입력하신 정보는 결과 발송 및 브랜드 진단 서비스 안내 목적으로만 사용되며, 제3자에게 제공되지 않습니다.
+      </div>
+      <div class="email-cta">
+        <button class="btn-primary" onclick="startSurvey()">테스트 시작하기</button>
+        <button class="btn-ghost" onclick="startSurvey()">건너뛰기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 3: 설문 ===== -->
+  <section id="screen-survey" class="screen">
+    <div class="survey-header">
+      <div class="survey-top">
+        <button class="survey-back" onclick="confirmBack()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          처음으로
+        </button>
+        <span class="survey-progress-text" id="progress-text">1 / 15</span>
+      </div>
+      <div class="survey-progress-bar-wrap">
+        <div class="survey-progress-bar" id="progress-bar" style="width:6.67%"></div>
+      </div>
+    </div>
+
+    <div class="survey-body" id="survey-body">
+      <!-- 문항이 동적으로 렌더링됩니다 -->
+    </div>
+
+    <div class="survey-footer-wrap">
+      <div class="survey-quote" id="survey-quote">
+        <p class="survey-quote-text" id="survey-quote-text"></p>
+        <p class="survey-quote-author" id="survey-quote-author"></p>
+      </div>
+      <div class="survey-footer">
+        <button class="btn-prev" id="btn-prev" onclick="prevQuestion()" disabled>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="btn-next" id="btn-next" onclick="nextQuestion()" disabled>다음</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 4: 결과 ===== -->
+  <section id="screen-result" class="screen">
+    <div class="result-hero">
+      <div class="result-stage-badge" id="result-stage-badge">성찰 심화점</div>
+      <h2 id="result-title">방향이 보이기 시작합니다</h2>
+      <p id="result-desc">우선순위를 정해 집중하면 달라집니다</p>
+      <div class="result-score-wrap">
+        <span class="result-score-num" id="result-score-num">0</span>
+        <span class="result-score-denom">/ 100</span>
+      </div>
+    </div>
+
+    <div class="result-body">
+
+      <!-- 레이더 차트 -->
+      <div class="result-section">
+        <h3 class="result-section-title">5개 영역 레이더 분석</h3>
+        <div class="chart-wrap">
+          <div class="chart-canvas-wrap">
+            <canvas id="radar-chart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- 영역별 점수 -->
+      <div class="result-section">
+        <h3 class="result-section-title">영역별 상세 점수</h3>
+        <div class="domain-cards" id="domain-cards">
+          <!-- 동적 렌더링 -->
+        </div>
+      </div>
+
+      <!-- 이메일 재수집 (미입력자) -->
+      <div class="result-section" id="email-recollect-section" style="display:none">
+        <div class="email-recollect">
+          <h4>결과를 이메일로 받아보시겠어요?</h4>
+          <p>진단 결과와 영역별 개선 인사이트를 이메일로 보내드립니다.</p>
+          <div class="email-recollect-form">
+            <input type="email" class="email-recollect-input" id="recollect-email" placeholder="이메일 주소 입력">
+            <button class="email-recollect-btn" onclick="saveRecollectEmail()">받기</button>
+          </div>
+          <div class="email-saved-msg" id="email-saved-msg">✓ 이메일이 저장되었습니다</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CTA -->
+    <div class="result-cta">
+      <button class="btn-primary" style="margin-bottom:0" onclick="ctaClick()">브랜드 성찰 진단 알아보기</button>
+      <button class="btn-copy" onclick="copyResult()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        결과 복사하기
+      </button>
+      <button class="btn-ghost" onclick="restartTest()">테스트 다시 하기</button>
+    </div>
+  </section>
+
+</div><!-- /.app-wrapper -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== 데이터: 5개 영역 & 15문항 =====
+const DOMAINS = [
+  { id: 1, name: '매출 데이터 분석력', bg: '#EBF1EE', text: '#253D35' },
+  { id: 2, name: '상품 기획 및 전략',  bg: '#F1EDE8', text: '#3D3525' },
+  { id: 3, name: '시그니처 전략',       bg: '#EDE8F1', text: '#352543' },
+  { id: 4, name: '상품 포트폴리오',     bg: '#E8EDF1', text: '#25353D' },
+  { id: 5, name: '상품 데이터 체계',    bg: '#F1E8EF', text: '#43253D' },
+];
+
+const QUESTIONS = [
+  // --- 영역 1 ---
+  {
+    id: 'Q1-1', domain: 1, type: 'checkbox',
+    text: '매출 데이터에서 어떤 것들을 발견하고 계십니까',
+    hint: '해당되는 항목을 모두 선택해주세요',
+    options: [
+      '판매 베스트 상품', '판매율 추이', '예상 매출 목표 달성율',
+      '지난주/작년 동기간 대비 비교', '주력 상품의 매출 변동',
+      '리오더 판단', '재고 금액', '객단가', '재구매율', 'D2C 매출 비중'
+    ]
+  },
+  {
+    id: 'Q1-2', domain: 1, type: 'radio',
+    text: '주력 상품들의 매출 추이를 주기적으로 점검하십니까',
+    options: [
+      { letter: 'A', text: '정기적으로 점검하고 데이터를 전략에 반영합니다.' },
+      { letter: 'B', text: '점검은 하지만 전략으로 연결하지는 않습니다.' },
+      { letter: 'C', text: '점검해야 한다는 것은 알지만 어떻게 해야 할지 모릅니다.' },
+      { letter: 'D', text: '주기적으로 점검하지 않습니다.' },
+    ]
+  },
+  {
+    id: 'Q1-3', domain: 1, type: 'radio',
+    text: '우리 브랜드의 시즌 판매율 수치를 알고 있습니까',
+    options: [
+      { letter: 'A', text: '수치를 알고 매출 전략에 반영하고 있습니다.' },
+      { letter: 'B', text: '대략적으로는 알지만 정확한 수치는 모릅니다.' },
+      { letter: 'C', text: '중요한 건 알지만 보지 않고 있습니다.' },
+      { letter: 'D', text: '시즌 판매율을 어떻게 계산하는지 알고 싶습니다.' },
+    ]
+  },
+  // --- 영역 2 ---
+  {
+    id: 'Q2-1', domain: 2, type: 'radio',
+    text: '연간 운영 스케줄을 기획하고 관리하고 있습니까',
+    options: [
+      { letter: 'A', text: '연간 스케줄이 있고 주기적으로 점검·보완합니다.' },
+      { letter: 'B', text: '스케줄은 있지만 점검·보완이 부족합니다.' },
+      { letter: 'C', text: '필요성은 알지만 체계적으로 관리하지 못합니다.' },
+      { letter: 'D', text: '연간 스케줄을 어떻게 만드는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q2-2', domain: 2, type: 'radio',
+    text: '신상품 기획에 기존 판매 데이터를 반영합니까',
+    options: [
+      { letter: 'A', text: '판매 데이터를 상세히 분석하여 기획에 참고합니다.' },
+      { letter: 'B', text: '판매 데이터를 일부 참고합니다.' },
+      { letter: 'C', text: '반영해야 한다는 것은 알지만 어떻게 해야 할지 모릅니다.' },
+      { letter: 'D', text: '데이터 기반 기획 방법을 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q2-3', domain: 2, type: 'radio',
+    text: '신상품 출시 전 마케팅과 판매 전략을 미리 준비합니까',
+    options: [
+      { letter: 'A', text: '출시 전 마케팅·채널·일정을 전략적으로 준비하고 실행합니다.' },
+      { letter: 'B', text: '일부 준비하지만 체계적이지는 않습니다.' },
+      { letter: 'C', text: '준비해야 한다는 것은 알지만 실행이 잘 되지 않습니다.' },
+      { letter: 'D', text: '출시 전 전략 준비 방법을 알고 싶습니다.' },
+    ]
+  },
+  // --- 영역 3 ---
+  {
+    id: 'Q3-1', domain: 3, type: 'radio',
+    text: '고객이 우리 브랜드를 생각할 때 떠오르는 시그니처 상품이 있습니까',
+    options: [
+      { letter: 'A', text: '고객이 인지하는 대표 상품이 있습니다.' },
+      { letter: 'B', text: '우리가 생각한 대표 상품은 있지만 고객에게 충분히 알려지지 않았습니다.' },
+      { letter: 'C', text: '만들어야 한다고 생각하지만 아직 없습니다.' },
+      { letter: 'D', text: '시그니처 상품을 어떻게 만드는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q3-2', domain: 3, type: 'radio',
+    text: '시그니처 상품이 있을 때와 없을 때, 고객의 브랜드 인지에 차이가 있다고 생각합니까',
+    options: [
+      { letter: 'A', text: '매우 중요하다고 생각하고 전략적으로 운영합니다.' },
+      { letter: 'B', text: '중요하다고 생각하지만 아직 전략이 없습니다.' },
+      { letter: 'C', text: '어느 정도 영향이 있다고 생각합니다.' },
+      { letter: 'D', text: '시그니처와 브랜드 인지의 관계를 더 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q3-3', domain: 3, type: 'radio',
+    text: '브랜드 시그니처 개발을 지속적으로 합니까',
+    options: [
+      { letter: 'A', text: '시그니처의 중요성을 인지하여 R&D에 투자하고 있습니다.' },
+      { letter: 'B', text: '시도하고 있지만 체계적이지는 않습니다.' },
+      { letter: 'C', text: '필요성은 알지만 실행하지 않고 있습니다.' },
+      { letter: 'D', text: '시그니처 상품 개발 방법을 알고 싶습니다.' },
+    ]
+  },
+  // --- 영역 4 ---
+  {
+    id: 'Q4-1', domain: 4, type: 'radio',
+    text: '시즌 주력 상품 전략이 있습니까',
+    options: [
+      { letter: 'A', text: '시즌 주력 상품을 정하고 판매 전략을 세웁니다.' },
+      { letter: 'B', text: '주력 상품은 있지만 전략적으로 운영하지는 않습니다.' },
+      { letter: 'C', text: '필요성은 알지만 정해진 것이 없습니다.' },
+      { letter: 'D', text: '시즌 주력 상품 전략을 어떻게 세우는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q4-2', domain: 4, type: 'radio',
+    text: '제품 라인별 구성 전략 (역할과 목표)이 있습니까',
+    options: [
+      { letter: 'A', text: '라인별 역할과 목표가 정의되어 있습니다.' },
+      { letter: 'B', text: '라인 구분은 있지만 역할과 목표가 불명확합니다.' },
+      { letter: 'C', text: '필요성은 알지만 구체적으로 정의하지 못했습니다.' },
+      { letter: 'D', text: '제품 라인 구성 전략을 어떻게 세우는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q4-3', domain: 4, type: 'radio',
+    text: '고객이 다른 브랜드가 아닌 우리 브랜드 상품을 선택하는 이유를 알고 있습니까',
+    options: [
+      { letter: 'A', text: '분석하여 알고 있으며 상품 기획과 세일즈, 마케팅에 활용합니다.' },
+      { letter: 'B', text: '대략 알고 있지만 데이터가 있지는 않습니다.' },
+      { letter: 'C', text: '중요한 건 알지만 파악하지 못하고 있습니다.' },
+      { letter: 'D', text: '고객 선택 이유를 어떻게 파악하는지 알고 싶습니다.' },
+    ]
+  },
+  // --- 영역 5 ---
+  {
+    id: 'Q5-1', domain: 5, type: 'radio',
+    text: '상품 정보를 관리하는 품번 체계가 있습니까',
+    options: [
+      { letter: 'A', text: '품번 체계가 있고 데이터 관리에 활용합니다.' },
+      { letter: 'B', text: '품번 체계는 있지만 체계적으로 활용하지 않습니다.' },
+      { letter: 'C', text: '필요성은 알지만 갖추지 못했습니다.' },
+      { letter: 'D', text: '품번 체계가 왜 있어야 하는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q5-2', domain: 5, type: 'radio',
+    text: '상품 정보(품번 체계)를 매출 분석에 활용하고 있습니까',
+    options: [
+      { letter: 'A', text: '상품 정보를 바탕으로 매출 분석과 전략적 의사결정에 활용하고 있습니다.' },
+      { letter: 'B', text: '상품 정보를 참고하여 매출을 확인하는 수준이며 전략 도출까지는 않습니다.' },
+      { letter: 'C', text: '활용할 수 있다는 것은 알지만 실행하지 않고 있습니다.' },
+      { letter: 'D', text: '상품 정보를 매출 분석에 어떻게 활용하는지 알고 싶습니다.' },
+    ]
+  },
+  {
+    id: 'Q5-3', domain: 5, type: 'radio',
+    text: '통합 관리 시스템 (ERP 등의 솔루션)을 사용하고 있습니까',
+    options: [
+      { letter: 'A', text: '시스템을 갖추고 활용하고 있습니다.' },
+      { letter: 'B', text: '시스템 구축 전이며 도입을 검토하고 있습니다.' },
+      { letter: 'C', text: '필요성은 알지만 도입까지는 계획하지 않고 있습니다.' },
+      { letter: 'D', text: '시스템 관리가 왜 필요한지 알고 싶습니다.' },
+    ]
+  },
+];
+
+// 채점 매핑
+const SCORE_MAP = { A: 3, B: 2, C: 1, D: 0 };
+
+// Q2부터 표시할 철학자·학자 인용구 (14개, 인덱스 0 = Q2)
+const QUOTES = [
+  { text: '측정할 수 없는 것은 관리할 수 없다.', author: '피터 드러커' },
+  { text: '단순성은 궁극의 정교함이다.', author: '레오나르도 다빈치' },
+  { text: '전략이 없는 전술은 패배 전의 소음에 불과하다.', author: '손자' },
+  { text: '완벽함이란 더 이상 더할 것이 없을 때가 아니라, 더 이상 뺄 것이 없을 때 이루어진다.', author: '앙투안 드 생텍쥐페리' },
+  { text: '아는 것이 힘이다.', author: '프랜시스 베이컨' },
+  { text: '인간의 탁월함은 그가 아는 것이 아니라, 그가 하는 것에서 드러난다.', author: '아리스토텔레스' },
+  { text: '브랜드는 약속이다.', author: '월터 랜도' },
+  { text: '진정한 발견의 여정은 새로운 풍경을 찾는 것이 아니라 새로운 눈을 가지는 것이다.', author: '마르셀 프루스트' },
+  { text: '변화하지 않는 것은 변화해야 한다는 사실뿐이다.', author: '헤라클레이토스' },
+  { text: '자신을 알라.', author: '소크라테스' },
+  { text: '지식 없는 상상력은 날개 없는 새와 같다.', author: '알베르트 아인슈타인' },
+  { text: '준비된 자에게 기회는 행운이 된다.', author: '루키우스 세네카' },
+  { text: '데이터는 새로운 원유다. 그러나 정제하지 않으면 쓸모없다.', author: '클라이브 험비' },
+  { text: '우리가 무엇을 반복하는지가 곧 우리가 누구인지를 말해준다.', author: '아리스토텔레스' },
+];
+
+// ===== 상태 =====
+let currentQ = 0;         // 현재 문항 인덱스 (0-based)
+let answers = {};         // { 'Q1-1': [...checked], 'Q1-2': 'A', ... }
+let userData = { email: '', brand: '' };
+let radarChart = null;
+
+// ===== 화면 전환 =====
+function showScreen(name) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== Screen2: 테스트 시작 =====
+function startSurvey() {
+  userData.email = document.getElementById('input-email').value.trim();
+  userData.brand = document.getElementById('input-brand').value.trim();
+  currentQ = 0;
+  answers = {};
+  renderQuestion(0);
+  showScreen('survey');
+}
+
+function confirmBack() {
+  if (Object.keys(answers).length > 0) {
+    if (!confirm('테스트를 중단하고 처음으로 돌아가시겠습니까?\n입력된 응답은 초기화됩니다.')) return;
+  }
+  showScreen('intro');
+}
+
+// ===== 설문 렌더링 =====
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  const dom = DOMAINS.find(d => d.id === q.domain);
+  const total = QUESTIONS.length;
+  const progress = ((idx + 1) / total * 100).toFixed(2);
+
+  // 진행바
+  document.getElementById('progress-bar').style.width = progress + '%';
+  document.getElementById('progress-text').textContent = (idx + 1) + ' / ' + total;
+
+  // 이전 버튼
+  document.getElementById('btn-prev').disabled = (idx === 0);
+
+  // 다음/결과 버튼
+  const btnNext = document.getElementById('btn-next');
+  btnNext.textContent = (idx === total - 1) ? '결과 보기' : '다음';
+  btnNext.disabled = !hasAnswer(q);
+
+  // 문항 렌더링
+  const body = document.getElementById('survey-body');
+  body.innerHTML = '';
+
+  // 문항 번호
+  const num = document.createElement('div');
+  num.className = 'question-num';
+  num.textContent = 'Q' + (idx + 1);
+  body.appendChild(num);
+
+  // 문항 텍스트
+  const qText = document.createElement('div');
+  qText.className = 'question-text';
+  qText.textContent = q.text;
+  body.appendChild(qText);
+
+  if (q.type === 'checkbox') {
+    renderCheckbox(body, q);
+  } else {
+    renderRadio(body, q);
+  }
+
+  // 인용구 표시 (Q2 이상, idx >= 1)
+  const quoteEl = document.getElementById('survey-quote');
+  if (idx >= 1) {
+    const quote = QUOTES[(idx - 1) % QUOTES.length];
+    document.getElementById('survey-quote-text').textContent = `"${quote.text}"`;
+    document.getElementById('survey-quote-author').textContent = quote.author;
+    quoteEl.style.display = 'block';
+  } else {
+    quoteEl.style.display = 'none';
+  }
+
+  // 스크롤 상단
+  body.scrollTop = 0;
+}
+
+function renderCheckbox(body, q) {
+  const hint = document.createElement('div');
+  hint.className = 'checkbox-hint';
+  hint.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>${q.hint}`;
+  body.appendChild(hint);
+
+  const grid = document.createElement('div');
+  grid.className = 'checkbox-grid';
+
+  const savedAnswers = answers[q.id] || [];
+
+  q.options.forEach((opt, i) => {
+    const item = document.createElement('label');
+    item.className = 'checkbox-item' + (savedAnswers.includes(i) ? ' selected' : '');
+    item.innerHTML = `
+      <input type="checkbox" ${savedAnswers.includes(i) ? 'checked' : ''}>
+      <span class="checkbox-box">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3"><path d="M20 6L9 17l-5-5"/></svg>
+      </span>
+      <span class="checkbox-label">${opt}</span>
+    `;
+    item.addEventListener('click', (e) => { e.preventDefault(); toggleCheckbox(q, i, item); });
+    grid.appendChild(item);
+  });
+  body.appendChild(grid);
+}
+
+function toggleCheckbox(q, idx, itemEl) {
+  if (!answers[q.id]) answers[q.id] = [];
+  const arr = answers[q.id];
+  const pos = arr.indexOf(idx);
+  if (pos === -1) { arr.push(idx); itemEl.classList.add('selected'); }
+  else { arr.splice(pos, 1); itemEl.classList.remove('selected'); }
+
+  // 체크박스 시각 업데이트
+  document.getElementById('btn-next').disabled = !hasAnswer(q);
+}
+
+function renderRadio(body, q) {
+  const opts = document.createElement('div');
+  opts.className = 'radio-options';
+
+  const savedAnswer = answers[q.id];
+
+  q.options.forEach(opt => {
+    const item = document.createElement('label');
+    item.className = 'radio-item' + (savedAnswer === opt.letter ? ' selected' : '');
+    item.innerHTML = `
+      <input type="radio" name="${q.id}" value="${opt.letter}" ${savedAnswer === opt.letter ? 'checked' : ''}>
+      <span class="radio-letter">${opt.letter}</span>
+      <span class="radio-text">${opt.text}</span>
+    `;
+    item.addEventListener('click', () => selectRadio(q, opt.letter));
+    opts.appendChild(item);
+  });
+  body.appendChild(opts);
+}
+
+function selectRadio(q, letter) {
+  answers[q.id] = letter;
+  // 시각 업데이트
+  document.querySelectorAll('.radio-item').forEach(el => el.classList.remove('selected'));
+  document.querySelectorAll(`.radio-item input[value="${letter}"]`).forEach(inp => {
+    inp.parentElement.classList.add('selected');
+  });
+  document.getElementById('btn-next').disabled = false;
+}
+
+function hasAnswer(q) {
+  if (q.type === 'checkbox') {
+    return answers[q.id] && answers[q.id].length > 0;
+  }
+  return !!answers[q.id];
+}
+
+// ===== 이전/다음 =====
+function prevQuestion() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion(currentQ);
+  }
+}
+
+function nextQuestion() {
+  const q = QUESTIONS[currentQ];
+  if (!hasAnswer(q)) return;
+
+  if (currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQuestion(currentQ);
+  } else {
+    // 마지막 문항 → 결과
+    showResult();
+  }
+}
+
+// ===== 채점 =====
+function calcScores() {
+  const rawDomainScores = [0, 0, 0, 0, 0]; // 원점수 (영역당 최대 9)
+
+  QUESTIONS.forEach(q => {
+    const dIdx = q.domain - 1;
+    if (q.type === 'checkbox') {
+      const checked = answers[q.id] || [];
+      rawDomainScores[dIdx] += checked.length > 0 ? 3 : 0;
+    } else {
+      const letter = answers[q.id];
+      rawDomainScores[dIdx] += letter ? SCORE_MAP[letter] : 0;
+    }
+  });
+
+  // 영역별 20점 환산 (rawScore / 9 * 20, 반올림)
+  const domainScores = rawDomainScores.map(s => Math.round(s / 9 * 20));
+  const totalScore = domainScores.reduce((a, b) => a + b, 0); // 최대 100점
+  return { domainScores, rawDomainScores, totalScore };
+}
+
+function getStage(total) {
+  // 100점 기준: 80+, 45~79, 44-
+  if (total >= 80) return { key: 'expand', badge: '성찰 확장점', title: '기반이 탄탄합니다', desc: '다음 성장 단계를 설계할 때입니다.' };
+  if (total >= 45) return { key: 'deepen', badge: '성찰 심화점', title: '방향이 보이기 시작합니다', desc: '우선순위를 정해 집중하면 달라집니다.' };
+  return { key: 'start', badge: '성찰 시작점', title: '지금이 브랜드를 들여다볼 때입니다', desc: '방향이 생기면 빠르게 달라집니다.' };
+}
+
+function getDomainStatus(score) {
+  // 20점 기준: 15+, 9~14, 8-
+  if (score >= 15) return { label: '양호', bg: '#EBF1EE', text: '#253D35', barColor: '#253D35' };
+  if (score >= 9)  return { label: '보완 필요', bg: '#F8F0E3', text: '#8B6914', barColor: '#B8925A' };
+  return { label: '점검 필요', bg: '#F5E8E8', text: '#8B3A3A', barColor: '#C05A5A' };
+}
+
+// ===== 결과 화면 =====
+function showResult() {
+  const { domainScores, totalScore } = calcScores();
+  const stage = getStage(totalScore);
+
+  // 저장
+  saveResult(domainScores, totalScore, stage.key);
+
+  // 결과 헤더
+  document.getElementById('result-stage-badge').textContent = '브랜드 성찰';
+  document.getElementById('result-title').textContent = stage.title;
+  document.getElementById('result-desc').textContent = stage.desc;
+  document.getElementById('result-score-num').textContent = totalScore;
+
+  // 영역 카드
+  renderDomainCards(domainScores);
+
+  // 레이더 차트
+  renderRadarChart(domainScores);
+
+  // 이메일 미입력 → 재수집
+  if (!userData.email) {
+    document.getElementById('email-recollect-section').style.display = 'block';
+  }
+
+  showScreen('result');
+}
+
+function renderDomainCards(domainScores) {
+  const container = document.getElementById('domain-cards');
+  container.innerHTML = '';
+  DOMAINS.forEach((dom, i) => {
+    const score = domainScores[i];
+    const status = getDomainStatus(score);
+    const pct = score; // score는 이미 0~20, 바 너비는 score/20*100
+
+    const card = document.createElement('div');
+    card.className = 'domain-card';
+    card.style.background = 'var(--white)';
+    card.innerHTML = `
+      <div class="domain-card-info">
+        <div class="domain-card-name" style="color:${dom.text}">영역 ${dom.id} · ${dom.name}</div>
+        <div class="domain-card-bar-wrap">
+          <div class="domain-card-bar" style="width:0%;background:${status.barColor}" data-width="${pct * 5}"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0">
+        <div class="domain-card-score" style="color:${dom.text}">${score}<span>/20</span></div>
+        <span class="domain-card-status" style="background:${status.bg};color:${status.text}">${status.label}</span>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // 애니메이션 바
+  requestAnimationFrame(() => {
+    setTimeout(() => {
+      document.querySelectorAll('.domain-card-bar').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }, 100);
+  });
+}
+
+function renderRadarChart(domainScores) {
+  if (radarChart) { radarChart.destroy(); radarChart = null; }
+
+  const ctx = document.getElementById('radar-chart').getContext('2d');
+  const labels = DOMAINS.map(d => d.name);
+  const data = domainScores.map(s => parseFloat((s / 20 * 100).toFixed(1))); // 20점 → 100점 환산
+
+  radarChart = new Chart(ctx, {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [{
+        label: '영역별 점수',
+        data,
+        backgroundColor: 'rgba(37,61,53,0.18)',
+        borderColor: '#253D35',
+        borderWidth: 2.5,
+        pointBackgroundColor: '#253D35',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+      }]
+    },
+    options: {
+      responsive: true,
+      layout: {
+        padding: { top: 16, bottom: 16, left: 20, right: 20 }
+      },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: {
+            stepSize: 25,
+            display: false,
+          },
+          grid: { color: 'rgba(37,61,53,0.18)' },
+          angleLines: { color: 'rgba(37,61,53,0.25)' },
+          pointLabels: {
+            font: { family: "'Noto Sans KR', sans-serif", size: 12, weight: '500' },
+            color: '#253D35',
+            padding: 18,
+          }
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.raw}점`,
+          }
+        }
+      }
+    },
+    plugins: []
+  });
+}
+
+// ===== localStorage 저장 =====
+function saveResult(domainScores, totalScore, stageKey) {
+  const sessionId = 'session_' + Date.now();
+  const data = {
+    sessionId,
+    timestamp: new Date().toISOString(),
+    userData,
+    answers,
+    domainScores,
+    totalScore,
+    stageKey,
+  };
+  try {
+    localStorage.setItem('result_' + sessionId, JSON.stringify(data));
+    // 요약 목록 업데이트
+    const all = JSON.parse(localStorage.getItem('summary_all') || '[]');
+    all.unshift({ sessionId, timestamp: data.timestamp, totalScore, stageKey, brand: userData.brand });
+    localStorage.setItem('summary_all', JSON.stringify(all.slice(0, 50)));
+  } catch(e) { /* localStorage 없음 */ }
+}
+
+// ===== 이메일 재수집 =====
+function saveRecollectEmail() {
+  const val = document.getElementById('recollect-email').value.trim();
+  if (!val || !val.includes('@')) { showToast('유효한 이메일 주소를 입력해주세요'); return; }
+  userData.email = val;
+  document.getElementById('email-recollect-section').querySelector('.email-recollect-form').style.display = 'none';
+  document.getElementById('email-saved-msg').style.display = 'block';
+  showToast('이메일이 저장되었습니다');
+}
+
+// ===== CTA =====
+function ctaClick() {
+  showToast('브랜드 성찰 진단 페이지로 이동합니다');
+}
+
+// ===== 결과 복사 =====
+function copyResult() {
+  const { domainScores, totalScore } = calcScores();
+  const stage = getStage(totalScore);
+  let text = `[브랜드 성찰 : 제품편] 진단 결과\n`;
+  if (userData.brand) text += `브랜드: ${userData.brand}\n`;
+  text += `총점: ${totalScore} / 100점 (${stage.badge})\n\n`;
+  DOMAINS.forEach((dom, i) => {
+    const status = getDomainStatus(domainScores[i]);
+    text += `${dom.name}: ${domainScores[i]}점 / 20점 (${status.label})\n`;
+  });
+  text += `\n${stage.title}\n${stage.desc}`;
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showToast('결과가 클립보드에 복사되었습니다'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('결과가 클립보드에 복사되었습니다');
+  }
+}
+
+// ===== 재시작 =====
+function restartTest() {
+  answers = {};
+  userData = { email: '', brand: '' };
+  document.getElementById('input-email').value = '';
+  document.getElementById('input-brand').value = '';
+  document.getElementById('email-recollect-section').style.display = 'none';
+  document.getElementById('recollect-email').value = '';
+  document.getElementById('email-recollect-section').querySelector('.email-recollect-form').style.display = 'flex';
+  document.getElementById('email-saved-msg').style.display = 'none';
+  showScreen('intro');
+}
+
+// ===== 토스트 =====
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), duration);
+}
+</script>
+</body>
+</html>
